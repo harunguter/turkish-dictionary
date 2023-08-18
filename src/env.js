@@ -6,5 +6,6 @@ export default {
     content: "icerik",
     search: word => "/gts?ara=" + word,
     write: word => "yazim?ara=" + word
-  }
+  },
+  turkishLetters: [ "ç", "ğ", "ı", "ö", "ş", "ü", "â", "î", "û" ]
 };

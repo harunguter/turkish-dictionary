@@ -1,33 +1,113 @@
+import React, { useContext, useEffect } from "react";
+import _ from "lodash";
 import * as Semantic from "semantic-ui-react";
-
-
+import Context from "../../context";
 import env from "../../env";
 
-const Result = () => <Semantic.Segment>
-  <Semantic.Header
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}
-    as="h2"
-    color={env.mainColor}>
-        kelime
-    <Semantic.Header.Subheader>
-      <Semantic.Button 
-        size="mini"
-        basic
-        color={env.mainColor} >
-        <Semantic.Icon name="volume up" />
-        Dinle
-      </Semantic.Button>
-    </Semantic.Header.Subheader>
-  </Semantic.Header>
+import signAlphabet from "./signAlphabets";
 
-  <Semantic.Divider/>
+const Result = () => {
 
-    anlamlar
+  const {
+    word,
+    means,
+    error
+  } = useContext(Context);
 
-</Semantic.Segment>;
+  useEffect(() => {});
+
+  return (!_.isEmpty(means) || !_.isEmpty(error) )&& <Semantic.Segment>
+    {
+      error === "" ? <>
+        {
+          means.mean.map((mean, key) => <React.Fragment key={key}>
+            <Semantic.Header
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between"
+              }}
+              as="h2"
+              color={env.mainColor}>
+              {mean?.madde}
+              <Semantic.Header.Subheader>
+                <audio src={env.api.baseUrl + "ses/" + means.write[key].seskod + ".wav"} id={mean?.madde + "-reading"}/>
+                <Semantic.Button 
+                  size="mini"
+                  basic
+                  color={env.mainColor} 
+                  onClick={() => {
+                    const reading = document.getElementById(mean?.madde + "-reading");
+                    reading.play();
+                  }}>
+                  <Semantic.Icon name="volume up" />
+                  Dinle
+                </Semantic.Button>
+              </Semantic.Header.Subheader>
+            </Semantic.Header>
+
+            <Semantic.Divider/>
+
+            <Semantic.List as='ul'>
+              {
+                mean?.anlamlarListe?.map((mean, key) => {
+                  return <Semantic.List.Item as='li' key={key}>
+                    {mean.anlam}
+                  </Semantic.List.Item>;
+                })
+              }
+            </Semantic.List>
+          </React.Fragment>
+          )
+        }
+
+        <Semantic.Divider/>
+
+        <Semantic.Header 
+          as="h4"
+          color={env.mainColor}>
+            Türk İşaret Dili
+          <Semantic.Header.Subheader>
+            Parmak Alfabesiyle Gösterilişi
+          </Semantic.Header.Subheader>
+        </Semantic.Header>
+
+        <div style={{
+          display: "flex",
+          alignItems: "center"
+        }}>
+          {
+            word.split("").map((letter, key) => {
+
+              if (letter === "â") letter = "a";
+              if (letter === "î") letter = "i";
+              if (letter === "û") letter = "ü";
+
+              return <div key={key} > 
+                <Semantic.Image 
+                  width={50}
+                  src={signAlphabet[letter]}/>
+                <span style={{
+                  display: "block",
+                  width: "100%",
+                  textAlign: "center"
+                }}>
+                  {letter}
+                </span>
+              </div>;
+            })
+          }
+        </div>
+        
+        
+      </> : <Semantic.Message 
+        size="small"
+        error>
+        <Semantic.Message.Header>Hata</Semantic.Message.Header>
+        {error}
+      </Semantic.Message>
+    }
+  </Semantic.Segment>; 
+};
 
 export default Result;

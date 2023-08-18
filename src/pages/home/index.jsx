@@ -1,9 +1,7 @@
 import * as Semantic from "semantic-ui-react";
-
 import Form from "./form";
 import Result from "./result";
 import Info from "./info";
-
 import env from "../../env";
 
 const Home = () => {

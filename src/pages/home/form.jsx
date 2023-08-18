@@ -1,21 +1,51 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
+import _ from "lodash";
 import * as Semantic from "semantic-ui-react";
 import Context from "../../context";
-
+import api from "../../services/api";
 import env from "../../env";
 
-const turkishLetters = ["ç", "ğ", "ı", "ö", "ş", "ü", "â", "î", "û"];
-
-
 const Form = () => {
-    
+
+  const [loading, setLoading] = useState(false);
+
   const { 
     word, 
-    setWord 
+    setWord,
+    means,
+    setMeans,
+    error,
+    setError
   } = useContext(Context);
 
+  const searchMean = async() => {
+
+    setLoading(true);
+    await setError("");
+    await setMeans("");
+
+    const mean = await api.searchMean(word);
+    const write = await api.searchWrite(word);
+    
+    if(_.isNil(mean?.error)) {
+      await setMeans({
+        mean, 
+        write
+      });
+      await console.log("means:", {
+        mean, 
+        write
+      });
+    } else {
+      setError(mean.error); 
+      console.log("error:", error);
+    } 
+    
+    setLoading(false);
+  };
 
   return <Semantic.Segment 
+    loading={loading}
     inverted 
     style={{
       background: "#34495e"
@@ -27,15 +57,15 @@ const Form = () => {
       value={word}
       action={ 
         <Semantic.Button
-          onClick={() => console.log(word)}
+          onClick={() => word.length >= 2 && searchMean()}
           icon="search" 
           color={env.mainColor}/> 
       }
-      placeholder="Bir türkçe kelime girin..." />
+      placeholder="Bir kelime girin..." />
 
     <div className="turkish-letters">
       {
-        turkishLetters.map((turkishLetter, key) => 
+        env.turkishLetters.map((turkishLetter, key) => 
           <Semantic.Button 
             onClick={() => setWord(word + turkishLetter)}
             key={key}

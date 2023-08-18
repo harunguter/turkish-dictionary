@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Semantic from "semantic-ui-react";
-
 import api from "../../services/api";
-
 import env from "../../env";
 
 const Segment = ({
@@ -32,7 +30,7 @@ const Info = () => {
 
   const getContent = async() => {
     const data = await api.getContent();
-    console.log(data.kelime);
+    console.log("content:", data);
     setContent(data);
     setLoading(false);
   };
