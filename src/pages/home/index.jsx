@@ -7,6 +7,7 @@ import env from "../../env";
 const Home = () => {
   return <div className="app-container">
     <Semantic.Header 
+      textAlign="center"
       color={env.mainColor}
       as="h1">
       {env.appName}
