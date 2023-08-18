@@ -1,11 +1,6 @@
 {
   "name": "turkish-dictionary",
   "version": "1.0.0",
-  "description": "",
-  "main": "./src/index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"

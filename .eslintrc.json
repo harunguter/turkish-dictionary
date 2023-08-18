@@ -7,7 +7,8 @@
         "eslint:recommended"
     ],
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
     "rules": {
         "indent": [
@@ -33,13 +34,6 @@
                 "args": "after-used",
                 "ignoreRestSiblings": false
             }
-        ],
-        "import/order": [
-            "warn",
-            {
-              "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
-              "newlines-between": "always"
-            }
-          ]
+        ]
     }
 }
