@@ -1,2 +1,2 @@
 # Güncel Türkçe Sözlük
-![Homepage](https://raw.githubusercontent.com/harunguter/turkish-dictionary/master/screenshot/app.png)
+![Homepage](https://raw.githubusercontent.com/harunguter/turkish-dictionary/master/screenshot/homepage.png)
