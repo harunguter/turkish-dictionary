@@ -12,7 +12,6 @@ const Form = () => {
   const { 
     word, 
     setWord,
-    means,
     setMeans,
     error,
     setError
