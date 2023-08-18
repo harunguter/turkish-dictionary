@@ -1,5 +1,10 @@
 export default {
-  appName: "Turkish Dictionary",
+  appName: "Güncel Türkçe Sözlük",
   mainColor: "green",
-  apiUrl: ""
+  api: {
+    baseUrl: "https://sozluk.gov.tr/",
+    content: "icerik",
+    search: word => "/gts?ara=" + word,
+    write: word => "yazim?ara=" + word
+  }
 };

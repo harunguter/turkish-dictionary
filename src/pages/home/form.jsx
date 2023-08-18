@@ -31,8 +31,7 @@ const Form = () => {
           icon="search" 
           color={env.mainColor}/> 
       }
-      placeholder="Please type a turkish word..." 
-    />
+      placeholder="Bir türkçe kelime girin..." />
 
     <div className="turkish-letters">
       {

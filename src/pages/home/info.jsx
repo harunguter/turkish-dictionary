@@ -1,38 +1,63 @@
+import { useEffect, useState } from "react";
 import * as Semantic from "semantic-ui-react";
+
+import api from "../../services/api";
 
 import env from "../../env";
 
-const Header = ({title, text}) => <Semantic.Header
-  color={env.mainColor}
-  as="h4">
-  {title}
-  <Semantic.Header.Subheader>
-    {text}
-  </Semantic.Header.Subheader>
-</Semantic.Header>;
+const Segment = ({
+  title = "", 
+  text = "",
+  mean = "", 
+  loading = true
+}) =>  <Semantic.Segment 
+  style={{minHeight: 80}}
+  loading={loading}>
+  <Semantic.Header
+    color={env.mainColor}
+    as="h4">
+    {!loading && title}
+    <Semantic.Header.Subheader>
+      {!loading && text}
+    </Semantic.Header.Subheader>
+  </Semantic.Header>
+  {!loading &&  <Semantic.Divider/>}
+  {!loading && mean}
+</Semantic.Segment>;
 
 const Info = () => {
+
+  const [ loading, setLoading ] = useState(true);
+  const [ content, setContent ] = useState(null);
+
+  const getContent = async() => {
+    const data = await api.getContent();
+    console.log(data.kelime);
+    setContent(data);
+    setLoading(false);
+  };
+  
+  useEffect(() => {
+    getContent();
+  }, []);
+  
   return <Semantic.Grid columns={2} divided>
     <Semantic.Grid.Row stretched>
 
       <Semantic.Grid.Column>
-        <Semantic.Segment>
-          <Header 
-            title="Bir Kelime" 
-            text="kelime" />
-          <Semantic.Divider/>
-          anlam
-        </Semantic.Segment>
+        <Segment
+          loading={loading}
+          title="Bir Kelime" 
+          text={content?.kelime[0]?.madde} 
+          mean={content?.kelime[0]?.anlam}  />
       </Semantic.Grid.Column>
 
       <Semantic.Grid.Column>
-        <Semantic.Segment>
-          <Header 
-            title="Bir Deyim-Atasözü" 
-            text="deyim" />
-          <Semantic.Divider/>
-          anlam
-        </Semantic.Segment>
+        <Segment
+          loading={loading}
+          title="Bir Deyim-Atasözü" 
+          text={content?.atasoz[0]?.madde} 
+          mean={content?.atasoz[0]?.anlam}  />
       </Semantic.Grid.Column>
 
     </Semantic.Grid.Row>
