@@ -47,7 +47,7 @@ const Info = () => {
           loading={loading}
           title="Bir Kelime" 
           text={content?.kelime[0]?.madde} 
-          mean={content?.kelime[0]?.anlam}  />
+          mean={content?.kelime[0]?.anlam} />
       </Semantic.Grid.Column>
 
       <Semantic.Grid.Column>
@@ -55,7 +55,7 @@ const Info = () => {
           loading={loading}
           title="Bir Deyim-Atasözü" 
           text={content?.atasoz[0]?.madde} 
-          mean={content?.atasoz[0]?.anlam}  />
+          mean={content?.atasoz[0]?.anlam} />
       </Semantic.Grid.Column>
 
     </Semantic.Grid.Row>

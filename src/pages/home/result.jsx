@@ -85,7 +85,7 @@ const Result = () => {
 
               return <div key={key} > 
                 <Semantic.Image 
-                  width={50}
+                  height={35}
                   src={signAlphabet[letter]}/>
                 <span style={{
                   display: "block",
