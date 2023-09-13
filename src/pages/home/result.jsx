@@ -77,7 +77,7 @@ const Result = () => {
           alignItems: "center"
         }}>
           {
-            word.split("").map((letter, key) => {
+            means?.mean[0]?.madde?.split("").map((letter, key) => {
 
               if (letter === "â") letter = "a";
               if (letter === "î") letter = "i";
