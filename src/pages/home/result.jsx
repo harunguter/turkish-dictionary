@@ -61,7 +61,7 @@ const Result = () => {
           )
         }
 
-        <Semantic.Divider/>
+        {/* <Semantic.Divider/> */}
 
         <Semantic.Header 
           as="h4"
