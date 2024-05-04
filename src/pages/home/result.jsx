@@ -30,18 +30,22 @@ const Result = () => {
               color={env.mainColor}>
               {mean?.madde}
               <Semantic.Header.Subheader>
-                <audio src={env.api.baseUrl + "ses/" + means.write[key].seskod + ".wav"} id={mean?.madde + "-reading"}/>
-                <Semantic.Button 
-                  size="mini"
-                  basic
-                  color={env.mainColor} 
-                  onClick={() => {
-                    const reading = document.getElementById(mean?.madde + "-reading");
-                    reading.play();
-                  }}>
-                  <Semantic.Icon name="volume up" />
-                  Dinle
-                </Semantic.Button>
+                {
+                  !_.isNil(means.write[key]?.seskod) ? <>
+                    <audio src={env.api.baseUrl + "ses/" + means.write[key].seskod + ".wav"} id={mean?.madde + "-reading"}/>
+                    <Semantic.Button 
+                      size="mini"
+                      basic
+                      color={env.mainColor} 
+                      onClick={() => {
+                        const reading = document.getElementById(mean?.madde + "-reading");
+                        reading.play();
+                      }}>
+                      <Semantic.Icon name="volume up" />
+                     Dinle
+                    </Semantic.Button>
+                  </> : <></>
+                }
               </Semantic.Header.Subheader>
             </Semantic.Header>
 
