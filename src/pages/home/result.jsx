@@ -9,7 +9,6 @@ import signAlphabet from "./signAlphabets";
 const Result = () => {
 
   const {
-    word,
     means,
     error
   } = useContext(Context);
@@ -103,7 +102,11 @@ const Result = () => {
       </> : <Semantic.Message 
         size="small"
         error>
-        <Semantic.Message.Header>Hata</Semantic.Message.Header>
+        
+        <Semantic.Message.Header>
+          <Semantic.Icon name="x"/>
+          Hata
+        </Semantic.Message.Header>
         {error}
       </Semantic.Message>
     }
