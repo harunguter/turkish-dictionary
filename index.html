@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta
+      name="description"
+      content="Güncel Türkçe Sözlük - sozluk.gov.tr verilerini kullanan modern bir Türkçe sözlük uygulaması"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Güncel Türkçe Sözlük</title>
+    <script>
+      (function () {
+        try {
+          var ls = window.localStorage;
+          var accent = ls.getItem("theme:accent") || "emerald";
+          var radius = ls.getItem("theme:radius") || "default";
+          var mode = ls.getItem("theme:mode") || "system";
+          var resolved =
+            mode === "system"
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : mode;
+          var root = document.documentElement;
+          root.setAttribute("data-accent", accent);
+          root.setAttribute("data-radius", radius);
+          if (resolved === "dark") {
+            root.classList.add("dark");
+            root.style.colorScheme = "dark";
+          } else {
+            root.style.colorScheme = "light";
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>Lütfen JavaScript'i etkinleştirin.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
